@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('title')
     @if (is_null($user->id))
-        <title>{{ trans('core.create') .' '.trans_choice('core.user',1) }}</title>
+        <title>{{ trans('core.add') .' '.trans_choice('core.user',1) }}</title>
     @else
         <title>{{ trans('core.edit') .' '.trans_choice('core.user',1) }}</title>
     @endif

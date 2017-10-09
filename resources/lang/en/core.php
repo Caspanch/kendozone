@@ -185,7 +185,7 @@ return array (
   'impersonate' => 'Impersonate User',
   'leave_impersonation' => 'Leave impersonation',
   'team' => 'Team|Teams',
-  'no_team_yet' => 'Still no team registered in this tournament',
+  'still_no_team' => 'Still no team registered in this tournament',
   'add_new_team' => 'Add team',
   'registered_team' => 'Teams registered',
   'team_name' => 'Team Name',

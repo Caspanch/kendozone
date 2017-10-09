@@ -29,4 +29,5 @@ return array (
   'select_field' => 'Select an option',
   'no_association_available' => 'No associations in this federation',
   'no_club_available' => 'No clubs in this association',
+  'still_no_club' => 'Still no club in here!',
 );

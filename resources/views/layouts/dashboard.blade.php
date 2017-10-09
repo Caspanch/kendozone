@@ -60,7 +60,7 @@
     @include('layouts.headmenu')
 @endif
 <!-- Page container -->
-<div class="page-container">
+<div class="page-container" id="app">
     <!-- Page content -->
     <div class="page-content">
     @if (Auth::check())
@@ -80,9 +80,9 @@
     <!-- /page content -->
 </div>
 <!-- /page container -->
-<script>
-    var csrfToken = "{{csrf_token()}}";
-</script>
+{{--<script>--}}
+    {{--var csrfToken = "{{csrf_token()}}";--}}
+{{--</script>--}}
 @if(!empty(env('SENTRY_DSN_PUBLIC')))
     <script src="https://cdn.ravenjs.com/3.14.2/raven.min.js"></script>
     <script>

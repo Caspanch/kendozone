@@ -29,7 +29,8 @@ class AssociationController extends Controller
         if (Request::ajax()) {
             return $associations->pluck('name', 'id')->prepend('-', 0);
         }
-        $associations = $associations->where('id', '>', 1)->get();
+        $associations = $associations->where('id', '>', 1)
+            ->with('federation.country','president')->get();
         return view('associations.index', compact('associations'));
 
     }

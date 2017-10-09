@@ -36,7 +36,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
     Route::post('users/{user}/restore', 'UserController@restore')->name('users.restore');
     Route::get('users', 'UserController@index')->name('users.index');
 
-    // TODO Should be posting so nobody can restore tournament
     Route::post('associations/{association}/restore', 'AssociationController@restore');
     Route::post('clubs/{club}/restore', 'ClubController@restore');
 
@@ -51,10 +50,12 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
 
 
     Route::post('teams/{team}/competitors/{competitor}/add', 'CompetitorTeamController@store')->name('addCompetitorToTeam');
+    // TODO Remove should be renamed to delete for consistency
     Route::post('teams/{team}/competitors/{competitor}/remove', 'CompetitorTeamController@destroy')->name('removeCompetitorToTeam');
     Route::post('teams/{team1}/{team2}/competitors/{competitor}/move', 'CompetitorTeamController@update')->name('moveCompetitorToAnotherTeam');
 
     Route::post('teams/{team}/delete', 'TeamController@destroy')->name('teams.delete');
+    Route::post('associations/{association}/delete', 'AssociationController@destroy')->name('associations.delete');
 
     Route::post('associations/create', 'AssociationController@store')->name('associations.create');
     Route::post('club/create', 'ClubController@store')->name('clubs.create');
