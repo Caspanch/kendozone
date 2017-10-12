@@ -17,7 +17,6 @@ window._ = require('lodash');
 if (!window.Vue) {
     window.Vue = require('vue');
 }
-
 window.axios = require('axios');
 
 
@@ -25,20 +24,38 @@ window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };
-window.flash = function (text, type = 'success') {
-    let icon = "<i class='icon-trophy2'>";
-    if (type == 'error') {
-        icon = "<i class='icon-warning'>";
-    }
-    noty({
-        layout: 'bottomLeft',
-        theme: 'kz',
-        type: type,
-        width: 200,
-        dismissQueue: true,
-        timeout: 5000,
-        text: text,
-        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon">' + icon + '</i> </div>' +
-        '<div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-    });
+
+
+window.events = new Vue();
+Vue.component('flash', require('./vue/components/Flash.vue'));
+
+window.flash = function (message, level = 'success', action = null) {
+    window.events.$emit('flash', { message, level, action });
+};
+
+windows.deleteItem = function(url){
+    const vm = this;
+    this.isRequesting = true;
+    axios.post(this.url_delete, function () {
+    })
+        .then(function (response) {
+            if (response.data !== null && response.data.status === 'success') {
+                vm.isRequesting = false;
+                vm.isVisible = false;
+                flash('Item Deleted!');
+                return;
+            }
+            vm.isVisible = true;
+            vm.isRequesting = false;
+            return flash('Error in deleting Item')
+
+        })
+        .catch(function (response) {
+            vm.isVisible = true;
+            vm.isRequesting = false;
+            return flash('Error in deleting Item')
+        });
+};
+windows.restoreItem = function(url){
+
 };

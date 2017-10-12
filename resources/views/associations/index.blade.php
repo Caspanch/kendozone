@@ -14,15 +14,11 @@
     <!-- Submenu -->
     @include('layouts.displayMenuMyEntitiesOnTop')
     <!-- /Submenu -->
-
-
     <div class="container-fluid">
 
         @if (sizeof($associations)==0)
             @include('layouts.noAssociations')
         @else
-
-
             <table class="table table-togglable table-hover">
                 <thead>
                 <tr>
@@ -34,34 +30,32 @@
                     <th class="text-center" data-hide="all">{{ trans('structures.association.phone') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.country') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>
-
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($associations as $association)
                     <tr is="association-item"
-                            :association="{{ json_encode($association) }}"
-                            :url_edit="{{ json_encode(route('associations.edit', $association)) }}"
-                            :url_delete="{{ json_encode(route('api.associations.delete', $association)) }}"
+                        :association="{{  $association }}"
+                        :url_edit="{{ json_encode(route('associations.edit', $association)) }}"
+                        :url_delete="{{ json_encode(route('api.associations.delete', $association)) }}"
+                        :url_undo="{{ json_encode(route('api.associations.restore', $association)) }}"
                     >
+                        <template slot="name">
+                            @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
+                                <a href={{ route('associations.edit', $association) }} >{{ $association->name }}</a>
+                            @else
+                                {{ $association->name }}
+                            @endif
+                        </template>
                     </tr>
-
                 @endforeach
                 </tbody>
-
             </table>
         @endif
-
-
     </div>
-
     @include("errors.list")
 @stop
 @section('scripts_footer')
     {!! Html::script('js/pages/header/footable.js') !!}
-
-    <script>
-        var url = "{{ URL::action('AssociationController@index') }}";
-    </script>
     {!! Html::script('js/associations.js') !!}
 @stop

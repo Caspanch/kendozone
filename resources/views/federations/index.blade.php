@@ -59,12 +59,8 @@
                     </tr>
 
                 @endforeach
-
-
             </table>
         @endif
-
-
     </div>
 
     @include("errors.list")
@@ -73,10 +69,7 @@
     {!! Html::script('js/pages/header/footable.js') !!}
     <script>
         $(function () {
-
-            // Initialize responsive functionality
             $('.table-togglable').footable();
-
         });
     </script>
 

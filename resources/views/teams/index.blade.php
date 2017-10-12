@@ -84,5 +84,5 @@
 
     </script>
     {!! Html::script('js/pages/footer/teamIndexFooter.js') !!}
-    {!! Html::script('js/addFighterToTeam.js')!!}
+    {!! Html::script('js/teams.js')!!}
 @stop

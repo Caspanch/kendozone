@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script data-cfasync="false">window.civchat = {
-            apiKey: "UqQXPuoajzcRnS4VrniDb1JfohA725XdaDtXW7zGThveM640NcmEkDWeXy7ZWHGo",
-            name: "",
-            email: ""
-        };</script>
-    <script data-cfasync="false" src="https://widget.userengage.io/widget.js"></script>
+    {{--<script data-cfasync="false">window.civchat = {--}}
+            {{--apiKey: "UqQXPuoajzcRnS4VrniDb1JfohA725XdaDtXW7zGThveM640NcmEkDWeXy7ZWHGo",--}}
+            {{--name: "",--}}
+            {{--email: ""--}}
+        {{--};</script>--}}
+    {{--<script data-cfasync="false" src="https://widget.userengage.io/widget.js"></script>--}}
     <script>
         window.Laravel = {
             csrfToken: "{{ csrf_token() }}"
@@ -72,6 +72,7 @@
             <div class="content" id="app">
                 @yield('content')
                 @include('layouts.footer')
+                <flash message="{{ session('flash_message')['message'] }}"></flash>
             </div>
             <!-- /content area -->
         </div>
@@ -79,6 +80,7 @@
     </div>
     <!-- /page content -->
 </div>
+
 <!-- /page container -->
 {{--<script>--}}
     {{--var csrfToken = "{{csrf_token()}}";--}}
@@ -103,6 +105,8 @@
         $.protip();
     });
 </script>
+
+
 @include('layouts.flash')
 @yield('scripts_footer')
 
