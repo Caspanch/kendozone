@@ -26,20 +26,6 @@
     </transition>
 </template>
 <script>
-    import Toasted from 'vue-toasted';
-    let options = {
-        type : 'success',
-        position: 'bottom-left',
-        duration: 5000,
-        action : {
-            text : 'Cancel',
-            onClick : (e, toastObject) => {
-                toastObject.goAway(0);
-            }
-        },
-    };
-    Vue.use(Toasted,options);
-
     export default {
         props: ['association', 'url_edit', 'url_delete', 'url_undo'],
 
@@ -61,15 +47,78 @@
         },
         methods: {
             deleteItem(associationId) {
-                deleteItem()
-            },
-            restoreItem(url_restore){
+                const vm = this;
+                this.isRequesting = true;
+                axios.post(this.url_delete, function () {
+                })
+                    .then(function (response) {
+                        if (response.data !== null && response.data.status === 'success') {
+                            vm.isRequesting = false;
+                            vm.isVisible = false;
+                            flash('Item deleted!','success',vm.url_undo, associationId);
+                            return;
+                        }
+                        vm.isVisible = true;
+                        vm.isRequesting = false;
+                        return flash('Failed deleting item 1','error')
 
+                    })
+                    .catch(function (response) {
+                        vm.isVisible = true;
+                        vm.isRequesting = false;
+                        console.log(response);
+                        flash('Failed deleting item 2','error')
+
+                    });
             },
+            restoreItem(data){
+                if (this.association.id != data.itemId) return; // Don't move cohertion
+                const vm = this;
+                this.isRequesting = true;
+                axios.post(data.url, function () {
+                })
+                    .then(function (response) {
+                        if (response.data !== null && response.data.status === 'success') {
+                            vm.isRequesting = false;
+                            vm.isVisible = true;
+                            return flash('Item restored')
+
+                        }
+                        vm.isVisible = false;
+                        vm.isRequesting = false;
+                        return flash('Item not restored','error')
+
+
+                    })
+                    .catch(function (response) {
+                        vm.isVisible = false;
+                        vm.isRequesting = false;
+                        flash('hello billo')
+
+                    });
+            },
+            initTable:function()
+            {
+                $('.table-togglable').footable();
+            }
         },
+
         mounted() {
+            window.events.$on(
+                'undo', data => this.restoreItem(data)
+            );
             $('.table-togglable').footable();
-        }
+
+
+        },
+        watch:
+            {
+                show:function(state, old)
+                {
+                    console.log('watch');
+                    if(state) this.initTable();
+                }
+            },
     }
 </script>
 <style>

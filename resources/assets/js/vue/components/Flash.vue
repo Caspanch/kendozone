@@ -9,8 +9,10 @@
 
         data() {
             return {
+                id: null,
                 body: this.message,
                 level: 'success',
+                url: null,
                 show: false
             }
         },
@@ -41,15 +43,19 @@
                              <div class="noty_close"></div>
                          </div>
                      </div>`;
-                if (data.action) {
-                    template = `<a href='#' class='undo_link'></a>
-                         <div class='row'>
-                             <div class='col-xs-8'> ${ data.message } </div>
-                             <div class='col-xs-3' align='right'>
-                                 <a class='undo' :href=data.action">
-                                     <span class='undo_link'>UNDO</span></a>
-                             </div>
-                         </div>`; // TODO Translate
+                if (data.url) {
+                    template = `<div class="noty_message">
+                                     <div class='row'>
+                                         <div class='col-xs-8'> ${ data.message } </div>
+                                         <div class='col-xs-3' align='right'>
+                                             <a class='undo' onclick="undoAction('${ data.url }','${ data.itemId }')">
+                                                 <span class='undo_link'>UNDO</span></a>
+                                         </div>
+                                     </div>
+                                 </div>`;
+
+
+                    // TODO Translate
                     timeout = 10000;
                     closeWith = ['button'];
                 }

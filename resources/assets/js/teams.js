@@ -1,4 +1,4 @@
-let VueDragula = require('../vue-dragula');
+let VueDragula = require('./vue/vue-dragula');
 Vue.config.debug = true;
 
 Vue.use(VueDragula);

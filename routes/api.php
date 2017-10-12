@@ -36,8 +36,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
     Route::post('users/{user}/restore', 'UserController@restore')->name('users.restore');
     Route::get('users', 'UserController@index')->name('users.index');
 
-    Route::post('associations/{association}/restore', 'AssociationController@restore');
-    Route::post('clubs/{club}/restore', 'ClubController@restore');
+    Route::post('associations/{association}/restore', 'AssociationController@restore')->name('associations.restore');
+    Route::post('clubs/{club}/restore', 'ClubController@restore')->name('clubs.restore');
 
 
     Route::resource('championships/{championship}/settings', 'ChampionshipSettingsController',

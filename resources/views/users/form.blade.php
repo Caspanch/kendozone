@@ -352,7 +352,7 @@
 
     </script>
     {!! Html::script('js/pages/header/userCreate.js') !!}
-    {!! Html::script('js/userForm.js') !!}
+    {!! Html::script('js/user.js') !!}
 
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
     {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}

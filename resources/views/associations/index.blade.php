@@ -36,6 +36,7 @@
                 @foreach($associations as $association)
                     <tr is="association-item"
                         :association="{{  $association }}"
+                        :url_base="{{ json_encode(route('api.root')) }}"
                         :url_edit="{{ json_encode(route('associations.edit', $association)) }}"
                         :url_delete="{{ json_encode(route('api.associations.delete', $association)) }}"
                         :url_undo="{{ json_encode(route('api.associations.restore', $association)) }}"

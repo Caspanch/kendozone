@@ -29,33 +29,10 @@ window.axios.defaults.headers.common = {
 window.events = new Vue();
 Vue.component('flash', require('./vue/components/Flash.vue'));
 
-window.flash = function (message, level = 'success', action = null) {
-    window.events.$emit('flash', { message, level, action });
+window.flash = function (message, level = 'success', url = null, itemId = null) {
+    window.events.$emit('flash', {message, level, url, itemId});
 };
 
-windows.deleteItem = function(url){
-    const vm = this;
-    this.isRequesting = true;
-    axios.post(this.url_delete, function () {
-    })
-        .then(function (response) {
-            if (response.data !== null && response.data.status === 'success') {
-                vm.isRequesting = false;
-                vm.isVisible = false;
-                flash('Item Deleted!');
-                return;
-            }
-            vm.isVisible = true;
-            vm.isRequesting = false;
-            return flash('Error in deleting Item')
-
-        })
-        .catch(function (response) {
-            vm.isVisible = true;
-            vm.isRequesting = false;
-            return flash('Error in deleting Item')
-        });
-};
-windows.restoreItem = function(url){
-
+window.undoAction = function (url, itemId = null) {
+    window.events.$emit('undo', {url, itemId});
 };
