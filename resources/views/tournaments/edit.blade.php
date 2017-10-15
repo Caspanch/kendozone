@@ -20,39 +20,19 @@ $favicon = asset('/favicon_kz-01.png');
     <!-- Detached content -->
     <div class="container-detached">
         <div class="content-detached">
-            <ul class="nav nav-tabs nav-tabs-solid nav-justified">
-                <li class="active"><a href="#general" data-toggle="tab" id="tab1">{{trans('core.general_data')}}</a>
-                </li>
-                <li><a href="#venue" data-toggle="tab" id="tab2">{{trans('core.venue')}}</a></li>
-                <li><a href="#categories" data-toggle="tab" id="tab3">{{trans_choice('categories.category',2)}}</a></li>
-                <li><a href="#category_setting" data-toggle="tab"
-                       id="tab4">{{trans_choice('categories.categorySettings',2)}}</a></li>
+            {{--<ul class="nav nav-tabs nav-tabs-solid nav-justified">--}}
+                {{--<li class="active"><a href="#general" data-toggle="tab" id="tab1">{{trans('core.general_data')}}</a>--}}
+                {{--</li>--}}
+                {{--<li><a href="#venue" data-toggle="tab" id="tab2">{{trans('core.venue')}}</a></li>--}}
+                {{--<li><a href="#categories" data-toggle="tab" id="tab3">{{trans_choice('categories.category',2)}}</a></li>--}}
+                {{--<li><a href="#category_setting" data-toggle="tab"--}}
+                       {{--id="tab4">{{trans_choice('categories.categorySettings',2)}}</a></li>--}}
 
-            </ul>
-
+            {{--</ul>--}}
             <div class="row">
                 <div class="col-lg-12">
-
                     <!-- Simple panel 1 : General Data-->
-
-
-                    <div class="tab-content">
-
-                        <div class="tab-pane active" id="general">
-                            @include("layouts.tournament.general")
-                        </div>
-
-                        <div class="tab-pane" id="venue">
-                            @include("layouts.tournament.venue")
-                        </div>
-                        <div class="tab-pane" id="categories">
-                            @include("layouts.tournament.categories")
-
-                        </div>
-                        <div class="tab-pane" id="category_setting">
-                            @include("layouts.tournament.categories_settings")
-                        </div>
-                    </div>
+                    <tournament-tabs></tournament-tabs>
                 </div>
                 <!-- /simple panel acordion -->
             </div>
@@ -144,9 +124,12 @@ $favicon = asset('/favicon_kz-01.png');
             return t;
         }(document, "script", "twitter-wjs"));
     </script>
+    <script>
+        $(".switch").bootstrapSwitch();
+    </script>
 
-
-    {!! Html::script('js/pages/header/tournamentEdit.js') !!}
+    {{--{!! Html::script('js/tournamentEdit.js') !!}--}}
+{{--    {!! Html::script('js/pages/header/tournamentEdit.js') !!}--}}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k&libraries=places') !!}
 
 

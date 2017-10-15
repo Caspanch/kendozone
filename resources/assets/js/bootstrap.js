@@ -42,3 +42,11 @@ window.flash = function (text, type = 'success') {
         '<div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
     });
 };
+
+Vue.component('tournament-tabs', require('./vue/components/TournamentTabs.vue'));
+Vue.component('tournament-tab-general', require('./vue/components/TournamentTabsGeneral.vue'));
+Vue.component('create-category', require('./vue/components/CategoryCreate.vue'));
+
+new Vue({
+    el: '#app',
+});
