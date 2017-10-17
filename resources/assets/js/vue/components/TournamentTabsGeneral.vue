@@ -4,18 +4,16 @@
             <div class="container-fluid">
                 <fieldset title="Données générales" class="mt-20 pt-20">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div class="form-group">
-                                <bs-input name="name" label="Nom"
+                                <bs-input name="name"
+                                          label="Nom"
                                           :error="check.error && 'Min. 6 chars'"
                                           :enter-submit="check.enterSubmit"
                                           :icon="check.icon"
                                           :label="check.label && 'Nom'"
-                                          :mask="check.mask?mask:null"
                                           :minlength="check.minlength?6:0"
-                                          pattern="^[a-z][a-z0-9]+$"
                                           :placeholder="check.placeholder"
-                                          :readonly="check.readonly"
                                           :required="check.required"
                                           :hide-help="check.hideHelp"
                                           :value.sync="input"
@@ -24,18 +22,12 @@
                                 </bs-input>
                             </div>
                         </div>
-                        <div class="col-md-3 col-md-offset-1">
-                            <div class="checkbox-switch">
-                                <label for="type" class="text-bold">Type de tournoi</label>
-                                <br>
-                                <input name="type" type="hidden" value="0" id="type">
-                                <input class="switch"
-                                       data-on-text="Ouvert"
-                                       data-off-text="Invitation"
-                                       name="type"
-                                       type="checkbox"
-                                       value="1" id="type">
-                            </div>
+                        <div class="col-md-3">
+                            <label for="type" class="text-bold">Type de tournoi</label>
+                            <select class="form-control" id="type" name="type">
+                                <option value="0" selected="selected">Invitation</option>
+                                <option value="1" selected="selected">Open</option>
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -57,7 +49,36 @@
                     <br>
                     <hr>
                     <br>
-                    <!--Calendrier-->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>From</label>
+                            <datepicker name="dateIni"
+                                        :value.sync="dateIni.value"
+                                        :format="dateIni.format"
+                                        :clear-button="dateIni.clear"
+                                        :placeholder="dateIni.placeholder">
+                            </datepicker>
+                        </div>
+                        <div class="col-md-4">
+                            <label>To</label>
+                            <datepicker name="registerDateLimit"
+                                        :value.sync="dateIni.value"
+                                        :format="dateIni.format"
+                                        :clear-button="dateIni.clear"
+                                        :placeholder="dateIni.placeholder">
+                            </datepicker>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Max Registration</label>
+
+                            <datepicker name="dateFin"
+                                        :value.sync="dateIni.value"
+                                        :format="dateIni.format"
+                                        :clear-button="dateIni.clear"
+                                        :placeholder="dateIni.placeholder">
+                            </datepicker>
+                        </div>
+                    </div>
                     <br>
                     <hr>
                     <br>
@@ -101,15 +122,16 @@
 </template>
 
 <script>
-    import {tab, tabs, formGroup, input, alert} from "vue-strap";
+    import {tab, tabs, formGroup, input, alert, datepicker} from "vue-strap";
 
     export default {
         components: {
-            tab: tab,
-            tabs: tabs,
-            formGroup: formGroup,
+            tab,
+            tabs,
+            formGroup,
             bsInput: input,
-            alert: alert
+            alert,
+            datepicker
         },
         data() {
             return {
@@ -118,21 +140,43 @@
                     hideHelp: true,
                     icon: true,
                     label: true,
-                    mask: true,
+                    mask: false,
                     minlength: true,
                     required: true
                 },
+                i18n: {
+                    night: 'Night',
+                    nights: 'Nights',
+                    'day-names': ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+                    'check-in': 'From',
+                    'check-out': 'To',
+                    'month-names': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                },
+                dateIni: {
+                    disabled: [],
+                    value: '2015-06-10',
+                    formats: [
+                        {value: 'dd/MM/yyyy', label: 'dd/MM/yyyy'},
+                        {value: 'dd-MM-yyyy', label: 'dd-MM-yyyy'},
+                        {value: 'yyyy,MM,dd', label: 'yyyy,MM,dd'},
+                        {value: 'yyyy-MM-dd', label: 'yyyy-MM-dd'},
+                        {value: 'yyyy.MM.dd', label: 'yyyy.MM.dd'},
+                        {value: 'MMM/dd/yyyy', label: 'MMM/dd/yyyy'},
+                        {value: 'MMMM/dd/yyyy', label: 'MMMM/dd/yyyy'},
+                        {value: 'MM/dd/yyyy', label: 'MM/dd/yyyy'},
+                        {value: 'MM-dd-yyyy', label: 'MM-dd-yyyy'}
+                    ],
+                    format: ['yyyy-MM-dd'],
+                    clear: true,
+                    placeholder: 'What is first day of your tournament'
+                },
+                hoveringTooltip: false,
                 event: null,
                 input: null,
-                match: null
+                match: null,
             }
         },
-        methods: {
-            mask(value) {
-                return value.toLowerCase().replace(/^[^a-z]+/, '').replace(/[^a-z0-9]/g, '')
-            },
-
-        },
+        methods: {},
 
     }
 </script>
